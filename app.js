@@ -1,12 +1,32 @@
-const modal = document.getElementById("modal");
-const openPost = document.getElementById("openPost");
-const closePost = document.getElementById("closePost");
-const submitPost = document.getElementById("submitPost");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, query, orderBy, onSnapshot, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-openPost.onclick = () => modal.classList.remove("hidden");
-closePost.onclick = () => modal.classList.add("hidden");
-
-submitPost.onclick = () => {
-  modal.classList.add("hidden");
-  alert("Posting disabled in beta UI");
+/* 🔒 Replace with your Firebase config */
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const feed = document.querySelector(".feed");
+
+// Query posts collection, newest first
+const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+
+// Real-time updates
+onSnapshot(q, (snapshot) => {
+  feed.innerHTML = "";
+  snapshot.forEach(doc => {
+    const post = doc.data();
+    const el = document.createElement("article");
+    el.className = "post";
+    el.innerHTML = `
+      <p class="quote">${post.content}</p>
+      <span class="time">quietly shared</span>
+    `;
+    feed.appendChild(el);
+  });
+});
