@@ -3,7 +3,7 @@ import { getFirestore, collection, query, orderBy, onSnapshot, Timestamp } from 
 
 /* 🔒 Replace with your Firebase config */
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
+  apiKey: "AIzaSyBkVxFEcxHsyzweX6rvcxvLKhJq-0TsCSY",
   authDomain: "YOUR_DOMAIN",
   projectId: "snook-2026-47995",
 };
