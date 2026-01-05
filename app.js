@@ -5,7 +5,7 @@ import { getFirestore, collection, query, orderBy, onSnapshot, Timestamp } from 
 const firebaseConfig = {
   apiKey: "YOUR_KEY",
   authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
+  projectId: "snook-2026-47995",
 };
 
 const app = initializeApp(firebaseConfig);
